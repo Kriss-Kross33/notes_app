@@ -1,0 +1,17 @@
+name: internet_connection_check_service
+description: Dart package that checks for internet connectivity.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  internet_connection_checker: ^1.0.0+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^5.0.0+1

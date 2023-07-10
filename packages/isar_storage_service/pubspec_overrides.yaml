@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: storage_api
+dependency_overrides:
+  storage_api:
+    path: ../storage_api

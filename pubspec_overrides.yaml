@@ -1,0 +1,14 @@
+# melos_managed_dependency_overrides: authentication_repository,errors,formz_input,internet_connection_check_service,isar_storage_service,storage_api
+dependency_overrides:
+  authentication_repository:
+    path: packages/authentication_repository
+  errors:
+    path: packages/errors
+  formz_input:
+    path: packages/formz_input
+  internet_connection_check_service:
+    path: packages/internet_connection_check_service
+  isar_storage_service:
+    path: packages/isar_storage_service
+  storage_api:
+    path: packages/storage_api

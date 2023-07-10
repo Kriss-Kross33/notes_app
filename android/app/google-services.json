@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "747852461149",
+    "project_id": "kng-notes-app-20230704",
+    "storage_bucket": "kng-notes-app-20230704.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747852461149:android:f7d6ad5baea147456fc9b4",
+        "android_client_info": {
+          "package_name": "com.example.notes_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747852461149-6uhr4d0pj3ldjmn63hq25p8a9631chn1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.notes_app",
+            "certificate_hash": "56a6768514227764329d7e6513077838e68c0d07"
+          }
+        },
+        {
+          "client_id": "747852461149-eng7u686pv5nbn62vlt43i7s22f9rp7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU3_uqML7QRtHgg_LrFxf2pVXto2SEYl0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747852461149-eng7u686pv5nbn62vlt43i7s22f9rp7s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "747852461149-aepg9o5v455io2b7u9i3m381kavvkdj6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.notesApp.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
