@@ -29,6 +29,10 @@ abstract class NoteRepository {
     required Note note,
   });
 
+  /// Clears note from local database
+  Future<Either<Failure, Success>> clearNotes();
+
+  /// Listens for changes to notes.
   Stream<List<Note>> listenNotes();
 
   /// Sync cached notes with cloud

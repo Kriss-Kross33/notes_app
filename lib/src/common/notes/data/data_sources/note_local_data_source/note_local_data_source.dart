@@ -25,6 +25,9 @@ abstract class NoteLocalDataSource {
   /// the Local database service for deletion of the note.
   Future<void> deleteNote({required int id});
 
+  /// Clears note from local database
+  Future<Success> clearNotes();
+
   /// Listens for Note changes
   Stream<List<Note>> listenNotes();
 }

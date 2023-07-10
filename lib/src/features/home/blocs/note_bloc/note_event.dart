@@ -9,6 +9,8 @@ abstract class NoteEvent extends Equatable {
 
 class FetchNotesEvent extends NoteEvent {}
 
+class ClearNotesEvent extends NoteEvent {}
+
 class DeleteNoteEvent extends NoteEvent {
   const DeleteNoteEvent({
     required this.id,

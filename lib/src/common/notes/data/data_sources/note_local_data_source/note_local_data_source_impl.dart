@@ -51,4 +51,9 @@ class NoteLocalDataSourceImpl extends NoteLocalDataSource {
       );
     }
   }
+
+  @override
+  Future<Success> clearNotes() {
+    return _manageNote(() async => _isarStorageService.clearNotes());
+  }
 }
