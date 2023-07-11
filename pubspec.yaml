@@ -46,12 +46,14 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   isar_generator: *isar_version
   json_serializable: ^6.7.1
   melos: ^3.1.0
   mockito: ^5.4.2
-  mockingjay: ^0.3.0
   mocktail: ^0.3.0
+  test: ^1.24.1
   
   very_good_analysis: ^5.0.0+1
 
