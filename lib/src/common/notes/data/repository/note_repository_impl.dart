@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:errors/errors.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:notes_app/src/common/notes/data/data.dart';
+import 'package:notes_app/src/common/notes/data/data_sources/note_remote_data_source/note_remote_data_source.dart';
 import 'package:notes_app/src/common/notes/domain/domain.dart';
 
 ///
@@ -11,10 +12,13 @@ class NoteRepositoryImpl extends NoteRepository {
   NoteRepositoryImpl({
     required NoteLocalDataSource localDataSource,
     required AuthenticationRepository authenticationRepository,
+    required NoteRemoteDataSource remoteDataSource,
   })  : _localDataSource = localDataSource,
+        _remoteDataSource = remoteDataSource,
         _authenticationRepository = authenticationRepository;
 
   final NoteLocalDataSource _localDataSource;
+  final NoteRemoteDataSource _remoteDataSource;
 
   final AuthenticationRepository _authenticationRepository;
 
@@ -74,7 +78,6 @@ class NoteRepositoryImpl extends NoteRepository {
       try {
         // Get the Firestore document reference for the Note
         final user = await _authenticationRepository.user.first;
-        await checkforlasttimestamp();
         await firebaseFirestore.collection('notes').doc(user.id).set(
           {
             'notesData': FieldValue.arrayUnion([note.toJson()])
@@ -87,15 +90,41 @@ class NoteRepositoryImpl extends NoteRepository {
     }
   }
 
-  Future<void> checkforlasttimestamp() async {
-    final firebaseFirestore = FirebaseFirestore.instance;
-    await firebaseFirestore.collection('notes').get().then((querySnapshot) {
-      for (final result in querySnapshot.docs) {
-        final data = result.data()['notesData'] as List<dynamic>;
-        final time = data.first['created'] as Timestamp;
-        final created = time.toDate();
-        print('{CREATED $created');
+  // Future<void> checkforlasttimestamp() async {
+  //   final firebaseFirestore = FirebaseFirestore.instance;
+  //   await firebaseFirestore.collection('notes').get().then((querySnapshot) {
+  //     for (final result in querySnapshot.docs) {
+  //       final data = result.data()['notesData'] as List<dynamic>;
+  //       final time = data.first['created'] as Timestamp;
+  //       final created = time.toDate();
+  //       print('{CREATED $created');
+  //     }
+  //   });
+  // }
+
+  @override
+  Future<Either<Failure, Success>> clearNotes() async {
+    try {
+      await _localDataSource.clearNotes();
+      return right(Success.instance);
+    } on CacheException catch (e) {
+      return left(CacheFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> syncFromCloudToLocalDb() async {
+    try {
+      final remoteNotes = await _remoteDataSource.fetchAllNotes();
+      if (remoteNotes.isEmpty) {
+        throw const CacheException(errorMessage: 'No cache present');
       }
-    });
+      for (final note in remoteNotes) {
+        await _localDataSource.updateNote(note: note);
+      }
+      return right(Success.instance);
+    } on CacheException catch (e) {
+      return left(CacheFailure(errorMessage: e.toString()));
+    }
   }
 }

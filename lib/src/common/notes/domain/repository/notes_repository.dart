@@ -37,4 +37,7 @@ abstract class NoteRepository {
 
   /// Sync cached notes with cloud
   Future<void> syncNotes();
+
+  /// Sync notes from cloud to local database
+  Future<Either<Failure, Success>> syncFromCloudToLocalDb();
 }

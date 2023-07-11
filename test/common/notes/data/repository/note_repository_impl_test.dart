@@ -4,25 +4,31 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:notes_app/src/common/notes/data/data_sources/note_remote_data_source/note_remote_data_source.dart';
 import 'package:notes_app/src/common/notes/notes.dart';
 
 import 'note_repository_impl_test.mocks.dart';
 
 @GenerateMocks([
   NoteLocalDataSource,
+  NoteRemoteDataSource,
   AuthenticationRepository,
 ])
 void main() {
   late MockNoteLocalDataSource mockNoteLocalDataSource;
+  late MockNoteRemoteDataSource mockNoteRemoteDataSource;
   late MockAuthenticationRepository mockAuthenticationRepository;
   late NoteRepository noteRepository;
 
   setUp(() {
     mockNoteLocalDataSource = MockNoteLocalDataSource();
+    mockNoteRemoteDataSource = MockNoteRemoteDataSource();
     mockAuthenticationRepository = MockAuthenticationRepository();
+
     noteRepository = NoteRepositoryImpl(
       localDataSource: mockNoteLocalDataSource,
       authenticationRepository: mockAuthenticationRepository,
+      remoteDataSource: mockNoteRemoteDataSource,
     );
   });
 
