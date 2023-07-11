@@ -41,10 +41,11 @@ class AuthenticationRepository {
     required String password,
   }) async {
     try {
-      await _firebaseAuth?.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      // await _firebaseAuth?.createUserWithEmailAndPassword(
+      //   email: email,
+      //   password: password,
+      // );
+      await convertUserWithEmail(email: email, password: password);
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw SignupWithEmailAndPasswordError(errorMessage: e.message.toString());
     } catch (e) {
@@ -110,6 +111,11 @@ class AuthenticationRepository {
           debugPrint(
               "The account corresponding to the credential already exists, "
               "or is already linked to a Firebase User.");
+          await _firebaseAuth?.signInWithCredential(credential);
+        // See the API reference for the full list of error codes.
+        case "email-already-in-use":
+          await _firebaseAuth?.signInWithCredential(credential);
+          break;
           break;
         // See the API reference for the full list of error codes.
         default:
@@ -130,7 +136,8 @@ class AuthenticationRepository {
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-      await _firebaseAuth?.signInWithCredential(credential);
+      await convertUserWithGmail(credential);
+      //  await _firebaseAuth?.signInWithCredential(credential);
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw LoginWithGoogleError(errorMessage: e.toString());
     } catch (e) {
