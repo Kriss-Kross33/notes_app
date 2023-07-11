@@ -4,14 +4,17 @@ class _NoteItem extends StatelessWidget {
   const _NoteItem({
     required this.color,
     required this.note,
+    required this.index,
   });
 
   final Color color;
   final Note note;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: Key('note_item_$index'),
       onTap: () => context.pushNamed(RouteConsts.noteDetailRoute, extra: note),
       child: Container(
         padding: const EdgeInsets.only(

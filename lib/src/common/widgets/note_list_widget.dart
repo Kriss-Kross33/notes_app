@@ -52,6 +52,7 @@ class NoteListWidget extends StatelessWidget {
               child: _NoteItem(
                 color: noteCardColor,
                 note: note,
+                index: index,
               ),
             ),
           );

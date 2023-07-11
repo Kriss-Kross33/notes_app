@@ -18,6 +18,7 @@ class _SignupButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
           ),
           child: ElevatedButton(
+            key: const Key('signup_button'),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
               shadowColor: Colors.transparent,

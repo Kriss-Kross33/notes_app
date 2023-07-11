@@ -42,6 +42,7 @@ class _EditNoteMenuRowState extends State<EditNoteMenuRow> {
                             context: context,
                             builder: (context) {
                               return CustomAlertDialog(
+                                key: const Key('edit_note_dialog'),
                                 title: Image.asset(
                                   AssetConsts.info,
                                   color: Colors.white,
@@ -77,19 +78,20 @@ class _EditNoteMenuRowState extends State<EditNoteMenuRow> {
                                     width: 112,
                                     height: 39,
                                     child: ElevatedButton(
+                                      key:
+                                          const Key('discard_save_note_button'),
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: AppTheme.green,
                                       ),
                                       onPressed: () {
+                                        context.go(
+                                          RouteConsts.homeRoute,
+                                        );
                                         context
                                             .read<EditNoteCubit>()
                                             .onSaveNoteButtonPressed(
                                               widget.note,
                                             );
-
-                                        context.go(
-                                          RouteConsts.homeRoute,
-                                        );
                                       },
                                       child: const Text(
                                         'Save',
@@ -154,6 +156,7 @@ class _EditNoteMenuRowState extends State<EditNoteMenuRow> {
               child: Builder(
                 builder: (context) {
                   return InkWell(
+                    key: const Key('save_note_icon'),
                     borderRadius: BorderRadius.circular(15),
                     onTap: !isEdited
                         ? null
@@ -196,20 +199,19 @@ class _EditNoteMenuRowState extends State<EditNoteMenuRow> {
                                       width: 112,
                                       height: 39,
                                       child: ElevatedButton(
-                                        key: const Key('save_note'),
+                                        key: const Key('save_note_button'),
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: AppTheme.green,
                                         ),
                                         onPressed: () {
+                                          context.go(
+                                            RouteConsts.homeRoute,
+                                          );
                                           context
                                               .read<EditNoteCubit>()
                                               .onSaveNoteButtonPressed(
                                                 widget.note,
                                               );
-
-                                          context.go(
-                                            RouteConsts.homeRoute,
-                                          );
                                         },
                                         child: const Text(
                                           'Save',

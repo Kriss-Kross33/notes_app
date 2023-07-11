@@ -45,6 +45,7 @@ class NoteDetailMenuRow extends StatelessWidget {
           child: Builder(
             builder: (context) {
               return InkWell(
+                key: const Key('edit_note_icon'),
                 borderRadius: BorderRadius.circular(15),
                 onTap: () {
                   context.pushNamed(RouteConsts.editNoteRoute, extra: note);

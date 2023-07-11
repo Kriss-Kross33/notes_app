@@ -25,148 +25,158 @@ class LoginDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      key: const Key('login_dialog'),
       backgroundColor: AppTheme.nero,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(20),
         ),
       ),
-      child: StatefulBuilder(
-        builder: (context, setState) {
-          return Container(
-            width: constraints.maxWidth,
-            height: constraints.maxHeight * 0.7,
-            padding: const EdgeInsets.only(
-              top: 20,
-              left: 20,
-              right: 20,
-            ),
-            child: BlocProvider(
-              create: (context) => LoginCubit(
-                authenticationRepository:
-                    context.read<AuthenticationRepository>(),
-              ),
-              child: BlocListener<LoginCubit, LoginState>(
-                listener: (context, state) {
-                  if (state.status.isSuccess) {
-                    context.pop();
-                    context.read<NoteBloc>().add(ClearNotesEvent());
-                    context.read<NoteBloc>().add(FetchNotesEvent());
-                  }
-                },
-                child: Column(
-                  children: [
-                    Image.asset(
-                      AssetConsts.notesLogo,
-                      height: 40,
-                      width: 40,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    const _EmailTextField(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const _PasswordTextField(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    _LoginButton(width: constraints.maxWidth, height: 40),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const Row(
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: StatefulBuilder(
+          builder: (context, setState) {
+            return SingleChildScrollView(
+              child: Container(
+                width: constraints.maxWidth,
+                height: constraints.maxHeight * 0.7,
+                padding: const EdgeInsets.only(
+                  top: 20,
+                  left: 20,
+                  right: 20,
+                ),
+                child: BlocProvider(
+                  create: (context) => LoginCubit(
+                    authenticationRepository:
+                        context.read<AuthenticationRepository>(),
+                  ),
+                  child: BlocListener<LoginCubit, LoginState>(
+                    listener: (context, state) {
+                      if (state.status.isSuccess) {
+                        context.goNamed(RouteConsts.homeRoute);
+                        context.read<NoteBloc>().add(ClearNotesEvent());
+                      }
+                    },
+                    child: Column(
                       children: [
-                        Expanded(
-                          child: Divider(
-                            height: 1,
-                            color: Colors.white54,
+                        Image.asset(
+                          AssetConsts.notesLogo,
+                          height: 40,
+                          width: 40,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            'Or',
-                            style: TextStyle(fontSize: 12, color: Colors.white),
-                          ),
+                        const SizedBox(
+                          height: 40,
                         ),
-                        Expanded(
-                          child: Divider(
-                            height: 1,
-                            color: Colors.white54,
-                          ),
+                        const _EmailTextField(),
+                        const SizedBox(
+                          height: 10,
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    const GoogleLoginButton(),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Don't have an account? ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge
-                              ?.copyWith(color: Colors.white),
+                        const _PasswordTextField(),
+                        const SizedBox(
+                          height: 15,
                         ),
-                        TextButton(
-                          onPressed: () {
-                            context.pop();
-                            showDialog<void>(
-                              context: context,
-                              builder: (context) {
-                                return SignupDialog(
-                                  constraints: constraints,
+                        _LoginButton(width: constraints.maxWidth, height: 40),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        const Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                height: 1,
+                                color: Colors.white54,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                'Or',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                height: 1,
+                                color: Colors.white54,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        const GoogleLoginButton(),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Don't have an account? ",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                context.pop();
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (context) {
+                                    return SignupDialog(
+                                      constraints: constraints,
+                                    );
+                                  },
                                 );
                               },
-                            );
-                          },
-                          child: const Text(
-                            'Create one',
-                            style: TextStyle(
-                              color: Colors.green,
+                              child: const Text(
+                                'Create one',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
+                        ),
+                        BlocBuilder<LoginCubit, LoginState>(
+                          builder: (context, state) {
+                            if (state.status.isFailure) {
+                              return Text(
+                                '${state.errorMessage}',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: Colors.red,
+                                ),
+                              );
+                            }
+                            return const SizedBox.shrink();
+                          },
                         ),
                       ],
                     ),
-                    BlocBuilder<LoginCubit, LoginState>(
-                      builder: (context, state) {
-                        if (state.status.isFailure) {
-                          return Text(
-                            '${state.errorMessage}',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: Colors.red,
-                            ),
-                          );
-                        }
-                        return const SizedBox.shrink();
-                      },
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

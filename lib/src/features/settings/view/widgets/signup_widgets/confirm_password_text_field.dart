@@ -24,6 +24,7 @@ class _ConfirmPasswordTextFieldState extends State<_ConfirmPasswordTextField> {
           previous.confirmPassword != current.confirmPassword,
       builder: (context, state) {
         return AuthTextFormField(
+          key: const Key('signup_confirm_password_field'),
           hintText: 'Confirm password',
           suffixIcon: IconButton(
             icon: Icon(

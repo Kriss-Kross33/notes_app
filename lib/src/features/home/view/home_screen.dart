@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('home'),
       floatingActionButton: const AddNoteButton(),
       body: SafeArea(
         child: BlocListener<EditNoteCubit, EditNoteState>(
@@ -59,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return switch (state.status) {
                         NotesStatus.initial => const SizedBox.shrink(),
                         NotesStatus.empty => const EmptyWidget(
+                            key: Key('empty_widget'),
                             imagePath: AssetConsts.empty,
                             errorMessage: 'Create your first note !',
                           ),

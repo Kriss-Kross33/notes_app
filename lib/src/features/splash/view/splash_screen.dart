@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     checkForSignup();
-    _timer = Timer(const Duration(seconds: 3), () {
+    _timer = Timer(const Duration(seconds: 2), () {
       context.pushReplacementNamed(RouteConsts.homeRoute);
     });
   }
@@ -40,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('splash'),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,

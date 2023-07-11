@@ -9,6 +9,7 @@ class _EmailTextField extends StatelessWidget {
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         return AuthTextFormField(
+          key: const Key('login_email_field'),
           hintText: 'Enter email',
           errorText: state.email.displayError != null ? 'invalid email' : null,
           onChanged: (String emailString) =>

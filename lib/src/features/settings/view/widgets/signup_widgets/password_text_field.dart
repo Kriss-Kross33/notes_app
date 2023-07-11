@@ -21,6 +21,7 @@ class _PasswordTextFieldState extends State<_PasswordTextField> {
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
         return AuthTextFormField(
+          key: const Key('signup_password_field'),
           hintText: 'Enter password',
           obscureText: hidePassword,
           suffixIcon: IconButton(
