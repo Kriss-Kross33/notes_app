@@ -11,11 +11,11 @@ class FakeRoute extends Fake implements Route<dynamic> {}
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockNavigatorObserver mockNavigatorObserver;
+  // late MockNavigatorObserver mockNavigatorObserver;
 
-  setUp(() {
-    mockNavigatorObserver = MockNavigatorObserver();
-  });
+  // setUp(() {
+  //   mockNavigatorObserver = MockNavigatorObserver();
+  // });
 
   setUpAll(() {
     registerFallbackValue(FakeRoute());

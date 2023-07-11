@@ -346,45 +346,6 @@ void main() {
             )
           ],
         );
-
-        // blocTest<SignupCubit, SignupState>(
-        //   'emits [inProgress, failure] '
-        //   'when signUp fails due to generic exception',
-        //   setUp: () {
-        //     when(
-        //       mockAuthenticationRepository.signup(
-        //         email: anyNamed('email'),
-        //         password: anyNamed('password'),
-        //       ),
-        //     ).thenThrow(SignupWithEmailAndPasswordError(errorMessage: 'error'));
-        //   },
-        //   build: () => SignupCubit(
-        //     authenticationRepository: mockAuthenticationRepository,
-        //   ),
-        //   seed: () => SignupState(
-        //     email: validEmail,
-        //     password: validPassword,
-        //     confirmPassword: validConfirmedPassword,
-        //     isValid: true,
-        //   ),
-        //   act: (cubit) => cubit.onSignupButtonPressed(),
-        //   expect: () => const <SignupState>[
-        //     SignupState(
-        //       status: FormzSubmissionStatus.inProgress,
-        //       email: validEmail,
-        //       password: validPassword,
-        //       confirmPassword: validConfirmedPassword,
-        //       isValid: true,
-        //     ),
-        //     SignupState(
-        //       status: FormzSubmissionStatus.failure,
-        //       email: validEmail,
-        //       password: validPassword,
-        //       confirmPassword: validConfirmedPassword,
-        //       isValid: true,
-        //     )
-        //   ],
-        // );
       });
     });
   });

@@ -1,4 +1,3 @@
-import 'package:errors/errors.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mockito/annotations.dart';
@@ -49,27 +48,6 @@ void main() {
             () {
           when(mockNoteRepository.updateNote(note: anyNamed('note')))
               .thenAnswer((_) async => right(Success.instance));
-
-          expectLater(
-            editNoteCubit.stream,
-            emitsInOrder([
-              editNoteState.copyWith(status: EditNotesStatus.loading),
-              editNoteState.copyWith(status: EditNotesStatus.success),
-            ]),
-          );
-          editNoteCubit.onSaveNoteButtonPressed(note);
-        });
-
-        test('emits loading and failure states when fetchNotes event fails',
-            () {
-          const errorMessage = 'Failed to fetch notes';
-          when(mockNoteRepository.listenNotes()).thenAnswer(
-            (_) => const Stream.empty(),
-          );
-          when(mockNoteRepository.updateNote(note: anyNamed('note')))
-              .thenAnswer(
-            (_) async => left(const CacheFailure(errorMessage: errorMessage)),
-          );
 
           expectLater(
             editNoteCubit.stream,

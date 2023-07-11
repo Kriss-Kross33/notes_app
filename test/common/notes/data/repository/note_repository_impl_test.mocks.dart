@@ -5,13 +5,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:authentication_repository/src/authentication_repository.dart'
+import 'package:authentication_repository/authentication_repository.dart'
     as _i6;
-import 'package:authentication_repository/src/models/user_model.dart' as _i7;
 import 'package:firebase_auth/firebase_auth.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:notes_app/src/common/notes/data/data_sources/note_local_data_source/note_local_data_source.dart'
-    as _i4;
+import 'package:notes_app/src/common/common.dart' as _i4;
 import 'package:notes_app/src/common/notes/domain/domain.dart' as _i2;
 
 // ignore_for_file: type=lint
@@ -91,6 +89,20 @@ class MockNoteLocalDataSource extends _i1.Mock
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
   @override
+  _i5.Future<_i2.Success> clearNotes() => (super.noSuchMethod(
+        Invocation.method(
+          #clearNotes,
+          [],
+        ),
+        returnValue: _i5.Future<_i2.Success>.value(_FakeSuccess_0(
+          this,
+          Invocation.method(
+            #clearNotes,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i2.Success>);
+  @override
   _i5.Stream<List<_i2.Note>> listenNotes() => (super.noSuchMethod(
         Invocation.method(
           #listenNotes,
@@ -98,6 +110,39 @@ class MockNoteLocalDataSource extends _i1.Mock
         ),
         returnValue: _i5.Stream<List<_i2.Note>>.empty(),
       ) as _i5.Stream<List<_i2.Note>>);
+}
+
+/// A class which mocks [NoteRemoteDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNoteRemoteDataSource extends _i1.Mock
+    implements _i4.NoteRemoteDataSource {
+  MockNoteRemoteDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<List<_i2.Note>> fetchAllNotes() => (super.noSuchMethod(
+        Invocation.method(
+          #fetchAllNotes,
+          [],
+        ),
+        returnValue: _i5.Future<List<_i2.Note>>.value(<_i2.Note>[]),
+      ) as _i5.Future<List<_i2.Note>>);
+  @override
+  _i5.Future<_i2.Success> clearNotes() => (super.noSuchMethod(
+        Invocation.method(
+          #clearNotes,
+          [],
+        ),
+        returnValue: _i5.Future<_i2.Success>.value(_FakeSuccess_0(
+          this,
+          Invocation.method(
+            #clearNotes,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i2.Success>);
 }
 
 /// A class which mocks [AuthenticationRepository].
@@ -110,10 +155,10 @@ class MockAuthenticationRepository extends _i1.Mock
   }
 
   @override
-  _i5.Stream<_i7.UserModel> get user => (super.noSuchMethod(
+  _i5.Stream<_i6.UserModel> get user => (super.noSuchMethod(
         Invocation.getter(#user),
-        returnValue: _i5.Stream<_i7.UserModel>.empty(),
-      ) as _i5.Stream<_i7.UserModel>);
+        returnValue: _i5.Stream<_i6.UserModel>.empty(),
+      ) as _i5.Stream<_i6.UserModel>);
   @override
   _i5.Future<void> loginWithEmailAndPassword({
     required String? email,
@@ -149,13 +194,32 @@ class MockAuthenticationRepository extends _i1.Mock
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
   @override
-  bool isLoggedIn() => (super.noSuchMethod(
+  _i5.Future<void> convertUserWithEmail({
+    required String? email,
+    required String? password,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #isLoggedIn,
+          #convertUserWithEmail,
           [],
+          {
+            #email: email,
+            #password: password,
+          },
         ),
-        returnValue: false,
-      ) as bool);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> convertUserWithGmail(_i3.AuthCredential? credential) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #convertUserWithGmail,
+          [credential],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
   _i5.Future<void> loginWithGoogle() => (super.noSuchMethod(
         Invocation.method(
@@ -165,6 +229,14 @@ class MockAuthenticationRepository extends _i1.Mock
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+  @override
+  bool isLoggedIn() => (super.noSuchMethod(
+        Invocation.method(
+          #isLoggedIn,
+          [],
+        ),
+        returnValue: false,
+      ) as bool);
   @override
   _i5.Future<_i3.UserCredential> signInAnonymously() => (super.noSuchMethod(
         Invocation.method(

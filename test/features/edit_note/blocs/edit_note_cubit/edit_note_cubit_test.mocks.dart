@@ -115,6 +115,22 @@ class MockNoteRepository extends _i1.Mock implements _i4.NoteRepository {
         )),
       ) as _i5.Future<_i2.Either<_i6.Failure, _i4.Success>>);
   @override
+  _i5.Future<_i2.Either<_i6.Failure, _i4.Success>> clearNotes() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #clearNotes,
+          [],
+        ),
+        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i4.Success>>.value(
+            _FakeEither_0<_i6.Failure, _i4.Success>(
+          this,
+          Invocation.method(
+            #clearNotes,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i2.Either<_i6.Failure, _i4.Success>>);
+  @override
   _i5.Stream<List<_i4.Note>> listenNotes() => (super.noSuchMethod(
         Invocation.method(
           #listenNotes,
@@ -131,6 +147,22 @@ class MockNoteRepository extends _i1.Mock implements _i4.NoteRepository {
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+  @override
+  _i5.Future<_i2.Either<_i6.Failure, _i4.Success>> syncFromCloudToLocalDb() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #syncFromCloudToLocalDb,
+          [],
+        ),
+        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i4.Success>>.value(
+            _FakeEither_0<_i6.Failure, _i4.Success>(
+          this,
+          Invocation.method(
+            #syncFromCloudToLocalDb,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i2.Either<_i6.Failure, _i4.Success>>);
 }
 
 /// A class which mocks [NoteBloc].

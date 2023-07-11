@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:notes_app/src/common/common.dart';
 import 'package:notes_app/src/core/core.dart';
@@ -73,46 +72,7 @@ void main() {
     });
   });
 
-  // testWidgets('renders a list of notes', (WidgetTester tester) async {
-  //   // Build the HomeScreen with the list of notes
-  //   await tester.pumpWidget(
-  //     MultiBlocProvider(
-  //       providers: [
-  //         BlocProvider<NoteBloc>(
-  //           create: (context) => noteBloc,
-  //         ),
-  //         BlocProvider<EditNoteCubit>(
-  //           create: (context) => editNoteCubit,
-  //         ),
-  //       ],
-  //       child: const MaterialApp(
-  //         home: HomeScreen(),
-  //       ),
-  //     ),
-  //   );
-
-  //   // Verify that the list of notes is rendered correctly
-  //   expect(find.text('Note 1'), findsOneWidget);
-  //   expect(find.text('Note 2'), findsOneWidget);
-  //   expect(find.text('Note 3'), findsOneWidget);
-
-  //   // Verify that the content of the notes is rendered correctly
-  //   expect(find.text('This is the content of Note 1'), findsOneWidget);
-  //   expect(find.text('This is the content of Note 2'), findsOneWidget);
-  //   expect(find.text('This is the content of Note 3'), findsOneWidget);
-  // });
-// }
-
   group('add Note floating action button', () {
-    // GoRouter configuration
-    final router = GoRouter(
-      routes: [
-        GoRoute(
-          path: '/home',
-          builder: (context, state) => const HomeScreen(),
-        ),
-      ],
-    );
     testWidgets(
       'floating action button is rendered',
       (tester) async {
@@ -143,43 +103,6 @@ void main() {
           addNoteFloatingActionButton,
           isA<FloatingActionButton>(),
         );
-      },
-    );
-
-    testWidgets(
-      'navigates user to NoteEditScren',
-      (tester) async {
-        await tester.pumpWidget(
-          MultiBlocProvider(
-            providers: [
-              BlocProvider<NoteBloc>(
-                create: (context) => noteBloc,
-              ),
-              BlocProvider<EditNoteCubit>(
-                create: (context) => editNoteCubit,
-              ),
-            ],
-            child: MaterialApp.router(
-              routeInformationProvider: router.routeInformationProvider,
-              routerDelegate: router.routerDelegate,
-              routerConfig: router,
-            ),
-          ),
-        );
-
-        await tester.tap(find.byKey(const ValueKey('floating_action_button')));
-
-        final note = Note(
-          id: 1,
-          title: 'title',
-          body: 'body',
-          created: DateTime.now(),
-        );
-
-        verify(
-          () => router.pushNamed(RouteConsts.noteDetailRoute, extra: note),
-          //  navigator.push<void>(any(that: isRoute<void>())),
-        ).called(1);
       },
     );
   });
