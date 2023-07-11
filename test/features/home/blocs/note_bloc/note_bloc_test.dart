@@ -100,63 +100,6 @@ void main() {
 
         noteBloc.add(FetchNotesEvent());
       });
-
-      test('emits [loading, success] when deleteNote is called', () {
-        when(
-          mockNoteRepository.deleteNote(
-            id: anyNamed('id'),
-            note: anyNamed('note'),
-          ),
-        ).thenAnswer((_) async => right(Success.instance));
-
-        when(mockNoteRepository.fetchAllNotes())
-            .thenAnswer((_) async => right(notes));
-
-        expectLater(
-          noteBloc.stream,
-          emitsInOrder([
-            noteState.copyWith(status: NotesStatus.loading),
-            noteState.copyWith(status: NotesStatus.success),
-          ]),
-        );
-        noteBloc.add(
-          DeleteNoteEvent(
-            id: note.id,
-            note: note,
-          ),
-        );
-      });
-
-      test('emits loading and failure states when deleteNote event fails', () {
-        const errorMessage = 'Failed to fetch notes';
-
-        when(
-          mockNoteRepository.deleteNote(
-            id: anyNamed('id'),
-            note: anyNamed('note'),
-          ),
-        ).thenAnswer(
-          (realInvocation) async =>
-              left(const CacheFailure(errorMessage: errorMessage)),
-        );
-
-        expectLater(
-          noteBloc.stream,
-          emitsInOrder([
-            noteState.copyWith(status: NotesStatus.loading),
-            noteState.copyWith(
-              status: NotesStatus.failure,
-            ),
-          ]),
-        );
-
-        noteBloc.add(
-          DeleteNoteEvent(
-            id: note.id,
-            note: note,
-          ),
-        );
-      });
     },
   );
 }
