@@ -20,21 +20,25 @@ Future<void> main() async {
     overlays: [SystemUiOverlay.bottom],
   );
   final internetConnectionCheckService = InternetConnectionCheckService();
-  final isarStorageService =
-      IsarStorageService<Note>([NoteNodeSchema, NoteSchema]);
-  await isarStorageService.openDB(schemas: [NoteNodeSchema, NoteSchema]);
+  final isarStorageService = IsarStorageService<Note>([NoteSchema]);
+  await isarStorageService.openDB(schemas: [NoteSchema]);
 
   final notesLocalDataSource =
       NoteLocalDataSourceImpl(isarStorageService: isarStorageService);
 
   final authenticationRepository = AuthenticationRepository();
 
+  final remoteDataSource = NoteRemoteDataSourceImpl(
+    authenticationRepository: authenticationRepository,
+  );
+
   final cloudFireStore = FirebaseFirestore.instance
-    ..settings = const Settings(persistenceEnabled: false);
+    ..settings = const Settings(persistenceEnabled: true);
 
   final notesRepository = NoteRepositoryImpl(
     localDataSource: notesLocalDataSource,
     authenticationRepository: authenticationRepository,
+    remoteDataSource: remoteDataSource,
   );
 
   // Bloc.observer = SimpleBlocObserver();
