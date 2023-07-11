@@ -13,11 +13,11 @@ class AuthenticationBloc
     required AuthenticationRepository repository,
   })  : _repository = repository,
         super(const AuthenticationState.unauthenticated()) {
-    on<_AuthenticationUserChangedState>(_onAuthenticationUserChangedStae);
+    on<_AuthenticationUserChangedEvent>(_onAuthenticationUserChangedEvent);
     on<LogoutRequestedEvent>(_onLogoutRequestedEvent);
 
     _userSubscription = repository.user.listen((user) {
-      add(_AuthenticationUserChangedState(user: user));
+      add(_AuthenticationUserChangedEvent(user: user));
     });
   }
 
@@ -37,8 +37,8 @@ class AuthenticationBloc
     unawaited(_repository.logout());
   }
 
-  Future<void> _onAuthenticationUserChangedStae(
-    _AuthenticationUserChangedState event,
+  Future<void> _onAuthenticationUserChangedEvent(
+    _AuthenticationUserChangedEvent event,
     Emitter<AuthenticationState> emit,
   ) async {
     emit(

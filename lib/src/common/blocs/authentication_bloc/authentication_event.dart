@@ -4,8 +4,8 @@ sealed class AuthenticationEvent {
   const AuthenticationEvent();
 }
 
-class _AuthenticationUserChangedState extends AuthenticationEvent {
-  const _AuthenticationUserChangedState({required this.user});
+class _AuthenticationUserChangedEvent extends AuthenticationEvent {
+  const _AuthenticationUserChangedEvent({required this.user});
   final UserModel user;
 }
 
