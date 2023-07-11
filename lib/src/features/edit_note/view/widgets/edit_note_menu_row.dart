@@ -58,7 +58,7 @@ class _EditNoteMenuRowState extends State<EditNoteMenuRow> {
                                         backgroundColor: AppTheme.red,
                                       ),
                                       onPressed: () {
-                                        context.pop();
+                                        context.go(RouteConsts.homeRoute);
                                       },
                                       child: const Text(
                                         'Discard',
