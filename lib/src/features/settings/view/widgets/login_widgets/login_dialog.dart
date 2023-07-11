@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes_app/src/core/core.dart';
+import 'package:notes_app/src/features/features.dart';
 import 'package:notes_app/src/features/settings/blocs/blocs.dart';
 import 'package:notes_app/src/features/settings/view/widgets/auth_text_form_field.dart';
 import 'package:notes_app/src/features/settings/view/widgets/widgets.dart';
@@ -49,6 +50,8 @@ class LoginDialog extends StatelessWidget {
                 listener: (context, state) {
                   if (state.status.isSuccess) {
                     context.pop();
+                    context.read<NoteBloc>().add(ClearNotesEvent());
+                    context.read<NoteBloc>().add(FetchNotesEvent());
                   }
                 },
                 child: Column(

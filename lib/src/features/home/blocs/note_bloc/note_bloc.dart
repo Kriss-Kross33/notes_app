@@ -15,6 +15,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
         super(const NoteState()) {
     on<FetchNotesEvent>(_onFetchNoteEvent);
     on<DeleteNoteEvent>(_onDeleteNoteEvent);
+    on<ClearNotesEvent>(_onClearNotesEvent);
     _notesSubsciption = noteRepository.listenNotes().listen((newNotes) {
       _noteRepository.syncNotes();
     });
@@ -88,6 +89,25 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
             status: NotesStatus.success,
           ),
         );
+        add(FetchNotesEvent());
+      },
+    );
+  }
+
+  Future<void> _onClearNotesEvent(
+    ClearNotesEvent event,
+    Emitter<NoteState> emit,
+  ) async {
+    final eitherFailureOrNoteList = await _noteRepository.clearNotes();
+    eitherFailureOrNoteList.fold(
+      (failure) => _mapFailureToState(failure, emit),
+      (success) async {
+        emit(
+          state.copyWith(
+            status: NotesStatus.success,
+          ),
+        );
+        await _noteRepository.syncFromCloudToLocalDb();
         add(FetchNotesEvent());
       },
     );
