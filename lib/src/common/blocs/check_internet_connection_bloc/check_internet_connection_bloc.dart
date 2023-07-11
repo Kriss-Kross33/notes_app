@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_check_service/internet_connection_check_service.dart';
-import 'package:isar_storage_service/isar_storage_service.dart';
 import 'package:notes_app/src/common/common.dart';
 
 part 'check_internet_connection_event.dart';
@@ -14,12 +12,8 @@ class CheckInternetConnectionBloc
     extends Bloc<CheckInternetConnectionEvent, CheckInternetConnectionState> {
   CheckInternetConnectionBloc({
     required InternetConnectionCheckService internetConnectionCheckService,
-    required IsarStorageService<Note> isarStorageService,
-    required AuthenticationRepository authenticationRepository,
     required NoteRepository noteRepository,
   })  : _internetConnectionCheckService = internetConnectionCheckService,
-        _isarStorageService = isarStorageService,
-        _authenticationRepository = authenticationRepository,
         _noteRepository = noteRepository,
         super(const CheckInternetConnectionState()) {
     on<StartCheckInternetConnection>(_startCheckInternetConnection);
@@ -28,8 +22,6 @@ class CheckInternetConnectionBloc
   }
 
   final InternetConnectionCheckService _internetConnectionCheckService;
-  final IsarStorageService<Note> _isarStorageService;
-  final AuthenticationRepository _authenticationRepository;
   final NoteRepository _noteRepository;
 
   StreamSubscription<ConnectionStatus>? _internetConnectionSubscription;
