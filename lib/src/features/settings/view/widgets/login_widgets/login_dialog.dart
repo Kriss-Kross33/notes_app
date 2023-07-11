@@ -41,7 +41,7 @@ class LoginDialog extends StatelessWidget {
             return SingleChildScrollView(
               child: Container(
                 width: constraints.maxWidth,
-                height: constraints.maxHeight * 0.7,
+                height: constraints.maxHeight * 0.78,
                 padding: const EdgeInsets.only(
                   top: 20,
                   left: 20,
