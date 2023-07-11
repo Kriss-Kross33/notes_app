@@ -14,7 +14,6 @@ import 'authentication_bloc_test.mocks.dart';
 )
 void main() {
   group('AuthenticationBloc', () {
-    final user = MockUserModel();
     late MockAuthenticationRepository mockAuthenticationRepository;
     late MockUserCredential mockUserCredential;
     setUp(() {

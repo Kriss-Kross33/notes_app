@@ -37,22 +37,14 @@ class Mocks extends Mock {}
 ])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  const _mockFirebaseUserUid = 'mock-uid';
-  const _mockFirebaseUserEmail = 'mock-email';
 
   const email = 'kriss@gmail.com';
   const password = 'pAssw0rd@';
-  const user = UserModel(
-    id: _mockFirebaseUserUid,
-    email: _mockFirebaseUserEmail,
-    isAnonymous: true,
-  );
 
   group('AuthenticationRepository', () {
     late MockFirebaseAuth mockFirebaseAuth;
     late GoogleSignIn googleSignIn;
     late AuthenticationRepository authenticationRepository;
-    late MockUser mockFirebaseUser;
 
     setupFirebaseCoreMocks();
 
@@ -62,7 +54,6 @@ void main() {
 
     setUp(() {
       final mockFirebaseCore = MockFirebaseCore();
-      mockFirebaseUser = MockUser();
 
       Firebase.delegatePackingProperty = mockFirebaseCore;
 

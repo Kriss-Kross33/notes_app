@@ -39,13 +39,6 @@ void main() {
   group(
     'NoteBloc',
     () {
-      final note = Note(
-        id: 1,
-        title: 'New Note',
-        body: 'New Description',
-        created: DateTime.now(),
-      );
-
       final notes = [
         Note(
           id: 1,

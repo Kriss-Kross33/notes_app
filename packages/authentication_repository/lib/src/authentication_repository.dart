@@ -116,7 +116,7 @@ class AuthenticationRepository {
         case "email-already-in-use":
           await _firebaseAuth?.signInWithCredential(credential);
           break;
-          break;
+
         // See the API reference for the full list of error codes.
         default:
           debugPrint("Unknown error.");

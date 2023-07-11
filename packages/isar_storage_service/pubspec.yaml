@@ -14,8 +14,6 @@ dependencies:
   isar: *isar_version
   isar_flutter_libs: *isar_version # contains Isar Core
   path_provider: ^2.0.15
-  storage_api:
-    path: ../storage_api
 
 dev_dependencies:
   build_runner: any
