@@ -35,16 +35,21 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     unawaited(_repository.logout());
+    await _repository.signInAnonymously();
   }
 
   Future<void> _onAuthenticationUserChangedEvent(
     _AuthenticationUserChangedEvent event,
     Emitter<AuthenticationState> emit,
   ) async {
-    emit(
-      event.user == UserModel.empty
-          ? const AuthenticationState.unauthenticated()
-          : AuthenticationState.authenticated(user: event.user),
-    );
+    if (event.user.isAnonymous) {
+      emit(const AuthenticationState.unauthenticated());
+    } else {
+      emit(
+        event.user == UserModel.empty
+            ? const AuthenticationState.unauthenticated()
+            : AuthenticationState.authenticated(user: event.user),
+      );
+    }
   }
 }
