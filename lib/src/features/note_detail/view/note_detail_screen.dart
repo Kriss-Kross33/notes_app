@@ -32,6 +32,7 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
+            top: 10,
             left: 24,
             right: 24,
           ),
