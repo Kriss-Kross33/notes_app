@@ -14,32 +14,43 @@ class NoteRemoteDataSourceImpl extends NoteRemoteDataSource {
     return _cloudFireStore.collection('notes');
   }
 
-  DocumentReference<Map<String, dynamic>> getNotesDocument() {
-    return _cloudFireStore.collection('notes').doc();
-  }
-
   @override
-  Future<Success> clearNotes() {
-    // TODO: implement clearNotes
-    throw UnimplementedError();
+  Future<Success> clearNotes() async {
+    try {
+      final noteCollection = getNotesCollection();
+      final user = await _authenticationRepository.user.first;
+      await noteCollection.doc(user.id).delete();
+      return Success.instance;
+    } catch (e) {
+      throw const CacheException(
+        errorMessage: 'Error retrieving notes from cloud',
+      );
+    }
   }
 
   @override
   Future<List<Note>> fetchAllNotes() async {
-    final user = await _authenticationRepository.user.first;
-    final notesCollection = getNotesCollection();
-    var notes = <Note>[];
-    // Get docs from collection reference
-    final snapshotDoc = await notesCollection.doc(user.id).get();
-    if (snapshotDoc.exists) {
-      final data = snapshotDoc.data();
-      if (data != null) {
-        final result = data['notesData'] as List<dynamic>;
-        for (final noteMap in result) {
-          notes.add(Note.fromJson(noteMap as Map<String, dynamic>));
+    try {
+      final user = await _authenticationRepository.user.first;
+      final notesCollection = getNotesCollection();
+      final notes = <Note>[];
+      // Get docs from collection reference
+      final snapshotDoc = await notesCollection.doc(user.id).get();
+      // Check if documents exists
+      if (snapshotDoc.exists) {
+        final data = snapshotDoc.data();
+        if (data != null) {
+          final result = data['notesData'] as List<dynamic>;
+          for (final noteMap in result) {
+            notes.add(Note.fromJson(noteMap as Map<String, dynamic>));
+          }
         }
       }
+      return notes;
+    } catch (e) {
+      throw const CacheException(
+        errorMessage: 'Error retrieving notes from cloud',
+      );
     }
-    return notes;
   }
 }
