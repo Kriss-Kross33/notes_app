@@ -53,4 +53,22 @@ class NoteRemoteDataSourceImpl extends NoteRemoteDataSource {
       );
     }
   }
+
+  @override
+  Future<Success> deleteNote(Note note) async {
+    try {
+      final noteCollection = getNotesCollection();
+      final user = await _authenticationRepository.user.first;
+      await noteCollection.doc(user.id).update(
+        {
+          'notesData': FieldValue.arrayRemove([note.toJson()])
+        },
+      );
+      return Success.instance;
+    } catch (e) {
+      throw const CacheException(
+        errorMessage: 'Error retrieving notes from cloud',
+      );
+    }
+  }
 }

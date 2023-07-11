@@ -143,6 +143,20 @@ class MockNoteRemoteDataSource extends _i1.Mock
           ),
         )),
       ) as _i5.Future<_i2.Success>);
+  @override
+  _i5.Future<_i2.Success> deleteNote(_i2.Note? note) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteNote,
+          [note],
+        ),
+        returnValue: _i5.Future<_i2.Success>.value(_FakeSuccess_0(
+          this,
+          Invocation.method(
+            #deleteNote,
+            [note],
+          ),
+        )),
+      ) as _i5.Future<_i2.Success>);
 }
 
 /// A class which mocks [AuthenticationRepository].

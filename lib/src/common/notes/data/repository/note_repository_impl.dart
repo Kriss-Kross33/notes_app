@@ -29,6 +29,7 @@ class NoteRepositoryImpl extends NoteRepository {
   }) async {
     try {
       await _localDataSource.deleteNote(id: id);
+      await _remoteDataSource.deleteNote(note);
       return right(Success.instance);
     } on CacheException catch (e) {
       return left(CacheFailure(errorMessage: e.toString()));

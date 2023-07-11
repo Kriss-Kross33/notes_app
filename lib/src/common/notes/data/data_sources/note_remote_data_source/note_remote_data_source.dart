@@ -10,8 +10,20 @@ part 'note_remote_data_source_impl.dart';
 /// {@endtemplate}
 abstract class NoteRemoteDataSource {
   /// Returns the list of notes from the data source
+  ///
+  /// Retuurns instance of a list of [Note] when successful
+  /// Throws a CacheException when an error occurs
   Future<List<Note>> fetchAllNotes();
 
   /// Creates all notes saved to cloud.
+  ///
+  ///  Retuurns instance of [Success] when successful
+  /// Throws a CacheException when an error occurs
   Future<Success> clearNotes();
+
+  /// deletes a note saved to cloud.
+  ///
+  /// Retuurns instance of [Success] when successful
+  /// Throws a CacheException when an error occurs
+  Future<Success> deleteNote(Note note);
 }
