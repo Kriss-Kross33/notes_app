@@ -65,8 +65,6 @@ class NotesApp extends StatelessWidget {
           BlocProvider<CheckInternetConnectionBloc>(
             create: (BuildContext context) => CheckInternetConnectionBloc(
               internetConnectionCheckService: _internetConnectionCheckService,
-              authenticationRepository: _authenticationRepository,
-              isarStorageService: _isarStorageService,
               noteRepository: _notesRepository,
             )..add(StartCheckInternetConnection()),
           ),

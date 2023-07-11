@@ -1,9 +1,9 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:errors/errors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:notes_app/src/common/notes/data/data.dart';
-import 'package:notes_app/src/common/notes/data/data_sources/note_remote_data_source/note_remote_data_source.dart';
 import 'package:notes_app/src/common/notes/domain/domain.dart';
 
 ///
@@ -85,22 +85,10 @@ class NoteRepositoryImpl extends NoteRepository {
           SetOptions(merge: true),
         );
       } catch (e) {
-        print('Failed to sync  ${note.id}: $e');
+        debugPrint('Failed to sync  ${note.id}: $e');
       }
     }
   }
-
-  // Future<void> checkforlasttimestamp() async {
-  //   final firebaseFirestore = FirebaseFirestore.instance;
-  //   await firebaseFirestore.collection('notes').get().then((querySnapshot) {
-  //     for (final result in querySnapshot.docs) {
-  //       final data = result.data()['notesData'] as List<dynamic>;
-  //       final time = data.first['created'] as Timestamp;
-  //       final created = time.toDate();
-  //       print('{CREATED $created');
-  //     }
-  //   });
-  // }
 
   @override
   Future<Either<Failure, Success>> clearNotes() async {
