@@ -21,6 +21,8 @@ class AppTheme {
 
   static const Color greyAltColorAlt = Color(0xFFACADAD);
 
+  static const Color alabaster = Color(0xFFEDEAE0);
+
   static const Color nero = Color(0xFF252525);
 
   static const Color darkGrey = Color(0xFF3B3B3B);
@@ -55,13 +57,10 @@ class AppTheme {
     appBarTheme: const AppBarTheme(elevation: 0),
     dialogBackgroundColor: AppTheme.nero,
     colorScheme: const ColorScheme.light(
-        // primary: AppColorConsts.fandango[6],
-        // primaryContainer: AppColorConsts.fandango[4],
-        // onPrimary: AppColorConsts.black[6],
-        // secondary: AppColorConsts.violet[6],
-        // onSecondary: AppColorConsts.white,
-        ),
-    scaffoldBackgroundColor: Colors.white,
+      onPrimary: Colors.black,
+      secondary: Colors.black,
+    ),
+    scaffoldBackgroundColor: alabaster,
     buttonTheme: _buttonThemeData,
     textTheme: _lightTextTheme,
   );
@@ -86,6 +85,14 @@ class AppTheme {
     bodyLarge: _lightBodyText1,
     labelLarge: _lightButtonText,
     bodySmall: _lightCaptionText,
+  );
+
+  /// Button theme data
+  static final ButtonThemeData _darkButtonThemeData = ButtonThemeData(
+    colorScheme: const ColorScheme.light(
+      primary: Colors.white,
+    ),
+    disabledColor: Colors.grey.shade300,
   );
 
   /// Light Theme Headline 1
@@ -199,7 +206,7 @@ class AppTheme {
       onSecondary: Colors.white,
     ),
     scaffoldBackgroundColor: nero,
-    buttonTheme: _buttonThemeData,
+    buttonTheme: _darkButtonThemeData,
     textTheme: _darkTextTheme,
   );
 
