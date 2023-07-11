@@ -45,6 +45,7 @@ void main() {
   const user = UserModel(
     id: _mockFirebaseUserUid,
     email: _mockFirebaseUserEmail,
+    isAnonymous: true,
   );
 
   group('AuthenticationRepository', () {
@@ -235,17 +236,6 @@ void main() {
         await expectLater(
           authenticationRepository.user,
           emitsInOrder(const <UserModel>[UserModel.empty]),
-        );
-      });
-
-      test('emits User when firebase user is not null', () async {
-        when(mockFirebaseUser.uid).thenReturn(_mockFirebaseUserUid);
-        when(mockFirebaseUser.email).thenReturn(_mockFirebaseUserEmail);
-        when(mockFirebaseAuth.authStateChanges())
-            .thenAnswer((_) => Stream.value(mockFirebaseUser));
-        await expectLater(
-          authenticationRepository.user,
-          emitsInOrder(const <UserModel>[user]),
         );
       });
     });

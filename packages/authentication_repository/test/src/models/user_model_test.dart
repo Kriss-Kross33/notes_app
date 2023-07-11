@@ -9,8 +9,8 @@ void main() {
 
     test('uses value equality', () {
       expect(
-        UserModel(email: email, id: id),
-        equals(UserModel(email: email, id: id)),
+        UserModel(email: email, id: id, isAnonymous: false),
+        equals(UserModel(email: email, id: id, isAnonymous: false)),
       );
     });
 
@@ -19,7 +19,7 @@ void main() {
     });
 
     test('isEmpty returns false for non-empty user', () {
-      final user = UserModel(email: email, id: id);
+      final user = UserModel(email: email, id: id, isAnonymous: false);
       expect(user.isEmpty, isFalse);
     });
 
@@ -28,7 +28,7 @@ void main() {
     });
 
     test('isNotEmpty returns true for non-empty user', () {
-      final user = UserModel(email: email, id: id);
+      final user = UserModel(email: email, id: id, isAnonymous: false);
       expect(user.isNotEmpty, isTrue);
     });
   });
