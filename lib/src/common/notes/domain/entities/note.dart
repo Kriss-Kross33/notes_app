@@ -5,16 +5,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'note.g.dart';
 
-@Collection(inheritance: false)
-class NoteNode {
-  Id? id;
-
-  @TimestampConverter()
-  DateTime? timeStamp;
-
-  IsarLinks<Note> notes = IsarLinks<Note>();
-}
-
 class TimestampConverter implements JsonConverter<DateTime, Timestamp> {
   const TimestampConverter();
 
