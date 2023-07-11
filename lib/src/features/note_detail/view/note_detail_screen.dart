@@ -28,59 +28,64 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(
-          top: 50,
-          left: 24,
-          right: 24,
-        ),
-        child: Column(
-          children: [
-            NoteDetailMenuRow(
-              note: widget.note,
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Expanded(
-              child: MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                child: ListView(
-                  children: [
-                    Text(
-                      widget.note.title,
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            fontWeight: FontWeight.w400,
-                          ),
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Text(
-                      widget.note.body,
-                      style:
-                          Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                fontWeight: FontWeight.w400,
-                              ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    SizedBox(
-                      child: widget.note.updated != null
-                          ? Text('Updated: $created')
-                          : const SizedBox.shrink(),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text('Created: $created'),
-                  ],
+      key: const Key('note_detail'),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 24,
+            right: 24,
+          ),
+          child: Column(
+            children: [
+              NoteDetailMenuRow(
+                note: widget.note,
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Expanded(
+                child: MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: ListView(
+                    children: [
+                      Text(
+                        widget.note.title,
+                        style:
+                            Theme.of(context).textTheme.displaySmall?.copyWith(
+                                  fontWeight: FontWeight.w400,
+                                ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        widget.note.body,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                              fontWeight: FontWeight.w400,
+                            ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      SizedBox(
+                        child: widget.note.updated != null
+                            ? Text('Updated: $created')
+                            : const SizedBox.shrink(),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text('Created: $created'),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
