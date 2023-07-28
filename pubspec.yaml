@@ -22,6 +22,7 @@ dependencies:
   equatable: ^2.0.5
   errors:
     path: packages/errors
+  file_picker: ^5.3.3
   firebase_core: ^2.14.0
   flutter:
     sdk: flutter
@@ -82,34 +83,6 @@ flutter:
           weight: 400
         - asset: assets/fonts/Hero-Light.ttf
           weight: 200
-    - family: Manrope
-      fonts:
-        - asset: assets/fonts/Manrope-ExtraBold.ttf
-          weight: 900
-        - asset: assets/fonts/Manrope-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Manrope-Medium.ttf
-          weight: 600
-        - asset: assets/fonts/Manrope-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Manrope-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Manrope-ExtraLight.ttf
-          weight: 200
-
-    - family: Teko
-      fonts:
-
-        - asset: assets/fonts/Teko-Bold.ttf
-          weight: 900
-        - asset: assets/fonts/Teko-SemiBold.ttf
-          weight: 900
-        - asset: assets/fonts/Teko-Medium.ttf
-          weight: 600
-        - asset: assets/fonts/Teko-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Teko-Light.ttf
-          weight: 300
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Bold.ttf
