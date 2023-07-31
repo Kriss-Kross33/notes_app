@@ -505,7 +505,7 @@ packages:
     source: hosted
     version: "1.11.0"
   storage_api:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../storage_api"
       relative: true
