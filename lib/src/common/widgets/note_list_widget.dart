@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:notes_app/src/common/common.dart';
 import 'package:notes_app/src/core/core.dart';
 import 'package:notes_app/src/features/edit_note/view/widgets/widgets.dart';
